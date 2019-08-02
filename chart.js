@@ -1,10 +1,15 @@
 var width = document.getElementById('chartArea').clientWidth;
 //this allows us to collect the width of the div where the SVG will go.
 var height = width / 3.236;
-//I like to use the golden rectangle ratio if they work for my charts.
+var margin = {top: 40, right: 20, bottom: 30, left: 40}
 
-var svg = d3.select('#chartArea').append('svg');
-//We add our svg to the div area
+const data = await d3.csv('ebola.csv'); // load file
+var svg = d3.select('#chartArea').append('svg')
+                .attr("width", width )
+                .attr("height", height )
+            .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    //We add our svg to the div area
 
 
 //We will build a basic function to handle window resizing.
