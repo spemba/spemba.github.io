@@ -5,27 +5,32 @@ async function chartOne() {
     var margin = {top: 40, right: 20, bottom: 30, left: 40};
 
     var xscale = d3.scaleBand().domain(['United Kingdom','Spain','Senegal','Italy','USA','Mali',
-                                    'Nigeria','Liberia','Guinea','Sierra Leone'])
+                                        'Nigeria','Liberia','Guinea','Sierra Leone'])
                 .range([0,width - margin.left - margin.right]);
-    var yscale = d3.scaleLinear().domain([0, 9000]).range([height - margin.top - margin.bottom,0]);
+    var yscale = d3.scaleLinear().domain([0,8704]).range([height - margin.top - margin.bottom,0]);
     console.log('Running chart scipt now...');
     console.log(width);
     console.log(height);
-    const data = await d3.csv('Data/totalcases_country.csv'); // load file
+    const data = await d3.csv("Data/cases_counry.csv");
+    //d3.tsv('Data/totalcases_country.csv'); // load file
+    data.forEach(function(d) {
+        d.cases = + d.cases;
+    });
+    console.log(data.columns);
     console.log(data);
     var svg = d3.select('#chartArea').append('svg')
-                    .attr("width", width )
-                    .attr("height", height );
+                    .attr("width", width)
+                    .attr("height", height);
                 
         //We add our svg to the div area
         
     svg.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
             .selectAll('rect').data(data).enter().append('rect')
-            .attr('x', function(d, i){return xscale(i);})
-            .attr('y', function(d, i){return yscale(d.Cases);})
+            .attr('x', function(d){return xscale(d.country);})
+            .attr('y', function(d){return yscale(d.cases);})
             .attr('width', xscale.bandwidth())
-            .attr('height', function(d, i){return yscale(d.Cases);} );
+            .attr('height', function(d){return height - yscale(d.cases);} );
     svg.append('g')
             .attr('transform', 'translate('+ margin.left +','+ margin.top +')')
             .call(d3.axisLeft(yscale));
@@ -33,7 +38,7 @@ async function chartOne() {
           .attr('transform', 'translate('+margin.left+','+ (height + margin.top) +')')
           .call(d3.axisBottom(xscale));
         
-}
+}``
 chartOne();
 
 //We will build a basic function to handle window resizing.
