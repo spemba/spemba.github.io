@@ -1,4 +1,4 @@
-async function chartOne() {
+async function chartBubble() {
     var width = document.getElementById('chartArea').clientWidth;
     //this allows us to collect the width of the div where the SVG will go.
     var height = width / 2.236;
@@ -8,6 +8,7 @@ async function chartOne() {
                                         'Nigeria','Liberia','Guinea','Sierra Leone'])
                 .range([0,width - margin.left - margin.right]);
     var yscale = d3.scaleLinear().domain([0,8704]).range([height - margin.top - margin.bottom,0]);
+    var rscale = d3.scaleLinear().domain([0,8704]).range([5, 40]);
     console.log('Running chart scipt now...');
     console.log(width);
     console.log(height);
@@ -26,29 +27,13 @@ async function chartOne() {
         
     svg.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-            .selectAll('rect').data(data).enter().append('rect')
-            .attr('x', function(d){return xscale(d.country);})
-            .attr('y', function(d){return yscale(d.cases);})
-            .attr('width', xscale.bandwidth())
-            .attr('height', function(d){return height - margin.top - margin.bottom - yscale(d.cases);} );
-    svg.append('g')
-            .attr('transform', 'translate('+ margin.left +','+ margin.top +')')
-            .call(d3.axisLeft(yscale));
-    svg.append('g')
-          .attr('transform', 'translate('+margin.left+','+ (height + margin.top) +')')
-          .call(d3.axisBottom(xscale));
+            .selectAll('circle').data(data).enter().append('circle')
+            .attr('cx', function(d){return Math.random() * (width - 120);})
+            .attr('cy', function(d){return Math.random() * (height - 140);})
+            .attr('r', function(d){return rscale(d.cases);})
+            .style("fill", "#69b3a2")
+            .style("opacity", "0.7")
+            .attr("stroke", "black");
         
 }``
-chartOne();
-
-//We will build a basic function to handle window resizing.
-function resize() {
-    width = document.getElementById('chartArea').clientWidth;
-    height = width / 3.236;
-    d3.select('#chartArea svg')
-      .attr('width', width)
-      .attr('height', height);
-}
-
-window.onresize = resize;
-//Call our resize function if the window size is changed.
+chartBubble();
