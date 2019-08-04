@@ -8,7 +8,7 @@ async function chartBubble() {
                                         'Nigeria','Liberia','Guinea','Sierra Leone'])
                 .range([0,width - margin.left - margin.right]);
     var yscale = d3.scaleLinear().domain([0,8704]).range([height - margin.top - margin.bottom,0]);
-    var rscale = d3.scaleLinear().domain([0,8704]).range([5, 40]);
+    var rscale = d3.scaleLinear().domain([0,8704]).range([4, 80]);
     console.log('Running chart scipt now...');
     console.log(width);
     console.log(height);
@@ -24,7 +24,10 @@ async function chartBubble() {
                     .attr("height", height);
                 
         //We add our svg to the div area
-        
+    svg.append("rect")
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("fill", "pink");   
     svg.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
             .selectAll('circle').data(data).enter().append('circle')
