@@ -55,9 +55,9 @@ async function chartBubble() {
          
         //We add our svg to the div area
     svg.append("rect")
-        .attr("width", "100%")
-        .attr("height", "100%")
-        .attr("fill", "pink");   
+        .attr("width", "90%")
+        .attr("height", "90%")
+        .attr("fill", "grey");   
     svg.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
             .selectAll('circle').data(data).enter().append('circle')
