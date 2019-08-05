@@ -7,13 +7,12 @@ async function chartBar() {
     var xscale = d3.scaleBand().domain([0, 70])
                 .range([0,width - margin.left - margin.right]);
     var yscale = d3.scaleLinear().domain([0,9000]).range([height - margin.top - margin.bottom,0]);
-    console.log('Running chart scipt now...');
-    console.log(width);
-    console.log(height);
+    
     const data = await d3.csv("Data/cases_date.csv");
-    //d3.tsv('Data/totalcases_country.csv'); // load file
+    var parseTime = d3.timeParse("%B %d, %Y");
     data.forEach(function(d) {
         d.cases = + d.cases;
+        d.Date = parseTime(d.Date);
     });
     console.log(data.columns);
     console.log(data);
