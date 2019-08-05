@@ -55,7 +55,7 @@ async function chartBubble() {
          
         //We add our svg to the div area
     svg.append("rect")
-        .attr("width", "90%")
+        .attr("width", "100%")
         .attr("height", "90%")
         .attr("fill", "grey");   
     svg.append("g")
