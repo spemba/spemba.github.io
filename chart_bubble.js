@@ -9,9 +9,7 @@ async function chartBubble() {
                 .range([0,width - margin.left - margin.right]);
     var yscale = d3.scaleLinear().domain([0,8704]).range([height - margin.top - margin.bottom,0]);
     var rscale = d3.scaleLinear().domain([0,8704]).range([4, 80]);
-    console.log('Running chart scipt now...');
-    console.log(width);
-    console.log(height);
+    
     const data = await d3.csv("Data/cases_counry.csv");
     //d3.tsv('Data/totalcases_country.csv'); // load file
     data.forEach(function(d) {
@@ -22,7 +20,39 @@ async function chartBubble() {
     var svg = d3.select('#chartArea').append('svg')
                     .attr("width", width)
                     .attr("height", height);
-                
+      
+  var tooltip = d3.select('#chartArea')
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "black")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
+    .style("color", "white")
+
+    
+    var showTooltip = function(d) {
+    tooltip
+        .transition()
+        .duration(200)
+    tooltip
+        .style("opacity", 1)
+        .html(d.country + '<br>' +"Total cases: " + d.cases )
+        .style("left", (d3.mouse(this)[0]+30) + "px")
+        .style("top", (d3.mouse(this)[1]+30) + "px")
+    }
+    var moveTooltip = function(d) {
+    tooltip
+        .style("left", (d3.mouse(this)[0]+30) + "px")
+        .style("top", (d3.mouse(this)[1]+30) + "px")
+    }
+    var hideTooltip = function(d) {
+    tooltip
+        .transition()
+        .duration(200)
+        .style("opacity", 0)
+    }
+         
         //We add our svg to the div area
     svg.append("rect")
         .attr("width", "100%")
@@ -36,7 +66,10 @@ async function chartBubble() {
             .attr('r', function(d){return rscale(d.cases);})
             .style("fill", "#69b3a2")
             .style("opacity", "0.7")
-            .attr("stroke", "black");
+            .attr("stroke", "black")
+            .on("mouseover", showTooltip )
+            .on("mousemove", moveTooltip )
+            .on("mouseleave", hideTooltip );
         
 }``
 chartBubble();
