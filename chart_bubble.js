@@ -30,8 +30,7 @@ async function chartBubble() {
     .style("background-color", "black")
     .style("border-radius", "5px")
     .style("padding", "10px")
-    .style("color", "white")
-
+    .style("color", "white");
     
     var showTooltip = function(d) {
     tooltip
