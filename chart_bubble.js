@@ -9,11 +9,13 @@ async function chartBubble() {
                 .range([0,width - margin.left - margin.right]);
     var yscale = d3.scaleLinear().domain([0,8704]).range([height - margin.top - margin.bottom,0]);
     var rscale = d3.scaleLinear().domain([0,8704]).range([4, 80]);
+    var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
     
     const data = await d3.csv("Data/cases_counry.csv");
     data.forEach(function(d) {
         d.cases = + d.cases;
     });
+    colorScale.domain(data.map(function (d){ return d.country; })); 
     var svg = d3.select('#chartArea').append('svg')
                     .attr("width", width)
                     .attr("height", height);
@@ -65,7 +67,7 @@ async function chartBubble() {
             .attr('cx', function(d){return Math.random() * (width - 120);})
             .attr('cy', function(d){return Math.random() * (height - 140);})
             .attr('r', function(d){return rscale(d.cases);})
-            .style("fill", "#69b3a2")
+            .attr("fill", function (d){ return colorScale(d.country); })
             .style("opacity", "0.7")
             .attr("stroke", "black")
             .on("mouseover", showTooltip )
