@@ -11,12 +11,9 @@ async function chartBubble() {
     var rscale = d3.scaleLinear().domain([0,8704]).range([4, 80]);
     
     const data = await d3.csv("Data/cases_counry.csv");
-    //d3.tsv('Data/totalcases_country.csv'); // load file
     data.forEach(function(d) {
         d.cases = + d.cases;
     });
-    console.log(data.columns);
-    console.log(data);
     var svg = d3.select('#chartArea').append('svg')
                     .attr("width", width)
                     .attr("height", height);
@@ -57,7 +54,7 @@ async function chartBubble() {
     svg.append("rect")
         .attr("width", "100%")
         .attr("height", "90%")
-        .attr("fill", "grey");   
+        .attr("fill", "steelblue");   
     svg.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
             .selectAll('circle').data(data).enter().append('circle')
@@ -72,4 +69,4 @@ async function chartBubble() {
             .on("mouseleave", hideTooltip );
         
 }``
-chartBubble();
+

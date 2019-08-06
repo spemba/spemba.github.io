@@ -37,4 +37,4 @@ async function chartBar() {
           .call(d3.axisBottom(xscale));
         
 }``
-chartBar();
+

@@ -41,6 +41,29 @@
       .row.content {height:auto;} 
     }
   </style>
+  <script>
+    this.addEventListener("DOMContentLoaded", setupEvents, true);
+    function setupEvents(e)
+    {
+      var prevButton = document.getElementById("prevButton");
+      var nextButton = document.getElementById("nextButton");
+      prevButton.addEventListener('click', prevFunction, false);
+      nextButton.addEventListener('click', nextFunction, false);
+    }
+    function prevFunction(e)
+    {
+      //d3.select('#chartArea').selectAll("svg").selectAll("*").remove();
+      d3.select('#chartArea').html("");
+      chart_bar_deaths();
+    }
+ 
+    function nextFunction(e)
+     {
+      //d3.select('#chartArea').selectAll("g").selectAll("*").remove();
+      d3.select('#chartArea').html("");
+      chartBubble();
+     }
+  </script>
 </head>
 <body>
 
@@ -70,19 +93,20 @@
   <div class="row content">
     <div class="col-sm-2 sidenav">
         <div class="well">
-            <p>PREV</p>
+            <button type="button" id="prevButton" class="btn btn-primary">PREV</button>
           </div>
         
     </div>
-    <div class="col-sm-8 text-left" id="chartArea"> 
-      <h1>2014-2016 Ebola Outbreak</h1>
-      <p>The Western African Ebola virus epidemic was the most widespread outbreak 
-        of Ebola virus disease in history. The countries of Guinea, Liberia, and Sierra Leone
-        were by far the most affected.</p>
+    <div class="col-sm-8 text-left" >
+        <h1>2014-2016 Ebola Outbreak</h1>
+        <p>The Western African Ebola virus epidemic was the most widespread outbreak<br> 
+          of Ebola virus disease in history. The countries of Guinea, Liberia, and Sierra Leone<br>
+          were by far the most affected.</p>
+          <div id="chartArea"></div> 
     </div>
     <div class="col-sm-2 sidenav">
       <div class="well">
-        <p>NEXT</p>
+          <button type="button" id="nextButton" class="btn btn-primary">NEXT</button> 
       </div>
       
     </div>
@@ -92,7 +116,9 @@
 <footer class="container-fluid text-center">
   <p></p>
 </footer>
-
+<script src="chart.js"></script>
 <script src="chart_bubble.js"></script>
+<script src="chart_bar.js"></script>
+
 </body>
 </html>
