@@ -77,7 +77,7 @@ async function chartBubble() {
             .attr("text-anchor", "middle")  
             .style("font-size", "16px") 
             .style("text-decoration", "underline")  
-            .text("Total Ebola Cases By Country"); 
+            .text("Total Ebola Cases By Country (Hover for Details)"); 
         
 }``
 chartBubble();

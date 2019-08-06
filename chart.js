@@ -74,7 +74,7 @@ async function chart_bar_deaths() {
           .attr("text-anchor", "middle")  
           .style("font-size", "16px") 
           .style("text-decoration", "underline")  
-          .text("Total Ebola Deaths By Country"); 
+          .text("Total Ebola Deaths By Country (Hover for Details)"); 
     d3.select("#myChart")
           .select("p")
           .html("The virus caused major loss of life and socioeconomic disruption in the region.<br>"+
