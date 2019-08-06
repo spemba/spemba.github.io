@@ -34,6 +34,17 @@ async function chart_bar_deaths() {
     svg.append('g')
           .attr('transform', 'translate('+margin.left+','+ (height + margin.top) +')')
           .call(d3.axisBottom(xscale));
+    svg.append("text")
+          .attr("x", (width / 2))             
+          .attr("y", height - (margin.bottom / 3))
+          .attr("text-anchor", "middle")  
+          .style("font-size", "16px") 
+          .style("text-decoration", "underline")  
+          .text("Total Ebola Deaths By Country"); 
+    d3.select("#myChart")
+          .select("p")
+          .html("The virus caused major loss of life and socioeconomic disruption in the region.<br>"+
+                "By the end of the epidemy in June 2016, Total loss of life topped 11,325 deaths.");
               
 }``
 

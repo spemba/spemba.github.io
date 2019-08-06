@@ -17,8 +17,13 @@ async function chartBubble() {
     var svg = d3.select('#chartArea').append('svg')
                     .attr("width", width)
                     .attr("height", height);
-      
-  var tooltip = d3.select('#chartArea')
+    
+    d3.select("#myChart")
+      .select("p")
+      .html("The Western African Ebola virus epidemic was the most widespread outbreak<br>"+ 
+      "of Ebola virus disease in history. The countries of Guinea, Liberia, and Sierra Leone<br>"+
+      "were the most affected.");
+    var tooltip = d3.select('#chartArea')
     .append("div")
     .style("opacity", 0)
     .attr("class", "tooltip")
@@ -54,7 +59,7 @@ async function chartBubble() {
     svg.append("rect")
         .attr("width", "100%")
         .attr("height", "90%")
-        .attr("fill", "steelblue");   
+        .attr("fill", "steelblue");  
     svg.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
             .selectAll('circle').data(data).enter().append('circle')
@@ -67,6 +72,14 @@ async function chartBubble() {
             .on("mouseover", showTooltip )
             .on("mousemove", moveTooltip )
             .on("mouseleave", hideTooltip );
+        svg.append("text")
+            .attr("x", (width / 2))             
+            .attr("y", height - (margin.bottom / 3))
+            .attr("text-anchor", "middle")  
+            .style("font-size", "16px") 
+            .style("text-decoration", "underline")  
+            .text("Total Ebola Cases By Country"); 
         
 }``
+chartBubble();
 
