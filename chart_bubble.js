@@ -1,7 +1,8 @@
 async function chartBubble() {
+    scene = 1;
     var width = document.getElementById('chartArea').clientWidth;
     //this allows us to collect the width of the div where the SVG will go.
-    var height = width / 2.236;
+    var height = width / 3.236;
     var margin = {top: 40, right: 20, bottom: 30, left: 40};
 
     var xscale = d3.scaleBand().domain(['United Kingdom','Spain','Senegal','Italy','USA','Mali',
@@ -78,7 +79,7 @@ async function chartBubble() {
             .attr("y", height - (margin.bottom / 3))
             .attr("text-anchor", "middle")  
             .style("font-size", "16px") 
-            .style("text-decoration", "underline")  
+            .style("text-decoration", "bold")  
             .text("Total Ebola Cases By Country (Hover for Details)"); 
         
 }``

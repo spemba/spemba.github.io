@@ -42,6 +42,7 @@
     }
   </style>
   <script>
+    var scene;
     this.addEventListener("DOMContentLoaded", setupEvents, true);
     function setupEvents(e)
     {
@@ -54,14 +55,27 @@
     {
       //d3.select('#chartArea').selectAll("svg").selectAll("*").remove();
       d3.select('#chartArea').html("");
-      chartBubble();
+      if(scene ==2){
+        document.getElementById("prevButton").disabled = true;
+        chartBubble();
+      } else if(scene ==3){
+        document.getElementById("nextButton").disabled = false;
+        chartBar();
+      }
+      
     }
  
     function nextFunction(e)
      {
       //d3.select('#chartArea').selectAll("g").selectAll("*").remove();
       d3.select('#chartArea').html("");
-      chart_bar_deaths();
+      if(scene ==1){
+        document.getElementById("prevButton").disabled = false;
+        chartBar();
+      } else if(scene ==2){
+        document.getElementById("nextButton").disabled = true;
+        chart_bar_deaths();
+      }
      }
   </script>
 </head>
@@ -93,7 +107,7 @@
   <div class="row content">
     <div class="col-sm-2 sidenav">
         <div class="well">
-            <button type="button" id="prevButton" class="btn btn-primary">PREV</button>
+            <button type="button" id="prevButton" class="btn btn-primary" disabled>PREV</button>
           </div>
         
     </div>
