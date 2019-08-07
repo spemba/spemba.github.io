@@ -46,17 +46,21 @@ async function chartBar() {
         .html(formatTime(d.Date) + '<br>' +"Total cases: " + d.cases )
         .style("left", (d3.mouse(this)[0]+30) + "px")
         .style("top", (d3.mouse(this)[1]+30) + "px")
+        d3.select(this).style("fill", "orangered");
     }
     var moveTooltip = function(d) {
     tooltip
         .style("left", (d3.mouse(this)[0]+30) + "px")
-        .style("top", (d3.mouse(this)[1]+30) + "px")
+        .style("top", (d3.mouse(this)[1]+30) + "px");
     }
     var hideTooltip = function(d) {
     tooltip
         .transition()
         .duration(200)
-        .style("opacity", 0)
+        .style("opacity", 0);
+
+
+        d3.select(this).style("fill", "orange");
     }
     svg.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
