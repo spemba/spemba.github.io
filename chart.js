@@ -67,11 +67,11 @@ async function chart_bar_deaths() {
             .attr('transform', 'translate('+ margin.left +','+ margin.top +')')
             .call(d3.axisLeft(yscale));
     svg.append('g')
-          .attr('transform', 'translate('+margin.left+','+ (height + margin.top) +')')
+          .attr('transform', 'translate('+margin.left+','+ (height - margin.top + margin.bottom/3) +')')
           .call(d3.axisBottom(xscale));
     svg.append("text")
           .attr("x", (width / 2))             
-          .attr("y", height - (margin.bottom / 3))
+          .attr("y", margin.top)
           .attr("text-anchor", "middle")  
           .style("font-size", "16px") 
           .style("text-decoration", "bold")  

@@ -58,8 +58,6 @@ async function chartBar() {
         .transition()
         .duration(200)
         .style("opacity", 0);
-
-
         d3.select(this).style("fill", "orange");
     }
     svg.append("g")
@@ -77,13 +75,13 @@ async function chartBar() {
             .attr('transform', 'translate('+ margin.left +','+ margin.top +')')
             .call(d3.axisLeft(yscale));
     svg.append('g')
-          .attr('transform', 'translate('+margin.left+','+ (height + margin.top ) +')')
-          .call(d3.axisBottom(xscale));
-          //.tickFormat(d3.timeFormat("%d-%b-%y"))
-          //.tickValues(xscale.domain().filter(function(d,i){ return !(i%20)}));
+          .attr('transform', 'translate('+margin.left+','+ ( height - margin.top + margin.bottom/3  ) +')')
+          .call(d3.axisBottom(xscale)
+            .tickValues(xscale.domain().filter(function(d,i){ return !(i%10)}))
+            .tickFormat(formatTime));
     svg.append("text")
           .attr("x", (width / 2))             
-          .attr("y", height - (margin.bottom / 3))
+          .attr("y", margin.top )
           .attr("text-anchor", "middle")  
           .style("font-size", "16px") 
           .style("text-decoration", "bold")  
